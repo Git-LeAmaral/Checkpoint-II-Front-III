@@ -4,6 +4,7 @@
 
 .card:hover{
   border: 0.5px solid rgb(52, 52, 30);
+  transform: scale(1.1);
   cursor: pointer;
 }
 
