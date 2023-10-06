@@ -1,19 +1,33 @@
 .footerWrapper {
   margin-top: auto;
+  flex-direction: column;
+  display: flex;
+
+  border: 2px solid red;
 }
 
 .top {
+  display: flex;
   text-transform: uppercase;
-  padding: 1rem;
-  background: #f21d1d;
-  border: none;
-  color: white;
+  padding: 0.5rem;
+  background: #f39595;
+  border: 2px solid green;
+  color: white; 
+  margin: auto;
+  max-width: 300px; 
   margin-top: 2rem;
-  width: 100%;
-}
+  font-size: 10px;  
+  }
+
+  .seta{
+    max-width: 1.5rem;
+    height: auto;  
+  }
+
 
 .footer {
-  padding: 2rem 0;
+  padding: 2rem ;
+  margin: 1rem;
 }
 
 .icons {

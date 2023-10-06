@@ -14,7 +14,7 @@ export const Footer = ({ value }) => {
       <div className={styles.footerWrapper}>
         { value ?
           <button className={`btn btn-danger ${styles.top}`} onClick={scrollToTop} >
-            Voltar para o topo
+            <img src="/images/seta-para-cima.png" alt="seta" className={styles.seta}></img>
           </button> : <></>
         }
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
