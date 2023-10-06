@@ -31,7 +31,7 @@ export const Footer = ({ value }) => {
                   alt="DH-logo"
                 />
               </div>
-              <div className={`col-sm-12 col-lg-6 ${styles.icons}`}>
+              <div className={`col-sm-12 col-lg-6 ${styles.icons} ${darkMode ? `` : styles.iconsDark}`}>
                 <img
                   src="/images/ico-facebook.png"
                   alt="ícone do facebook"
