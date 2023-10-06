@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   
-  const { darkMode, changeTheme, state, logout } = useContext(OdontoContext)
+  const { darkMode, changeTheme, login, logout } = useContext(OdontoContext)
 
   return (
     <header className="sticky-top">
@@ -42,15 +42,11 @@ const Navbar = () => {
               <li className={`nav-item ${styles.navBarLink}`}>
 
                 {/* Ao clicar, o usuário deve ser redirecionado a home, com react-router */}
-                {state.login ? (<button onClick={() => logout()}
+                {login ? (<button onClick={() => logout()}
 
                     className={`btn ${darkMode ? `btn-light` : `btn-dark`}`}>
                       Logout
-                      </button>) : (<Link className='nav-link' to='/login'>Login</Link>)}
-
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
+                    </button>) : (<Link className='nav-link' to='/login'>Login</Link>)}
               </li>
               <li className={`nav-item ${styles.navBarLink}`}>
                 {/* Se o usuário estiver logado, deverá aparecer um botão de logout
@@ -59,8 +55,8 @@ const Navbar = () => {
                 ao formulário de login
                 O botão de logout deverá ser testado darkmode
                 se sim, btn-dark, se não, btn-light */}
-                <Link className="nav-link" href="/login">
-                  Login
+                <Link className="nav-link" to="/">
+                  Home
                 </Link>
               </li>
               <li className={`nav-item`}>
@@ -68,7 +64,8 @@ const Navbar = () => {
                  Lembre-se de usar um estado no contexto para fazer essa alteração.
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
-                <button className={`btn ${darkMode ? `btn-dark` : `btn-light`} ${styles.btnStyle}`} onClick={() => changeTheme}>
+                <button className={`btn ${darkMode ? `btn-dark` : `btn-light`} ${styles.btnStyle}`} onClick={() => 
+                  changeTheme()}>
                   { darkMode ? "🌙" : "☀"}
                 </button>
               </li>

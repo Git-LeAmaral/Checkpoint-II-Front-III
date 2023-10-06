@@ -1,12 +1,9 @@
-import { useContext } from "react";
+
 import styles from "./Form.module.css";
-import { OdontoContext } from "../../contexts/OdontoContext";
-import { useNavigate } from "react-router-dom";
+
 
 export const LoginForm = () => {
 
-  const { darkMode, login } = useContext(OdontoContext);
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     //Nesse handlesubmit você deverá usar o preventDefault,

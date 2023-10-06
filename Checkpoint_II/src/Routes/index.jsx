@@ -15,11 +15,11 @@ export function RouteList() {
 
             <Route path="/" element={<DefaultLayout/>}>
               <Route path="/" element={<Home />} />
-              <Route path="/dentist/:id" element={<Detail />} />
             </Route>
 
             <Route path="/" element={<OtherLayout />}>
               <Route path="/login" element={<Contact />} />
+              <Route path="/dentist/:id" element={<Detail />} />
 
             </Route>
             
