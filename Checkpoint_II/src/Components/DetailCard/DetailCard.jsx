@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import ScheduleFormModal from '../ScheduleModal/ScheduleFormModal'
 import styles from './DetailCard.module.css'
 
+
 const DetailCard = () => {
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api passando o
@@ -41,7 +42,7 @@ const DetailCard = () => {
                 data-bs-target="#exampleModal"
                 className={`btn btn-light ${styles.button}`}
               >
-                Marcar consulta
+                Marcar Consulta
               </button>
             </div>
           </div>

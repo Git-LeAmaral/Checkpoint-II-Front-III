@@ -8,4 +8,8 @@
 
 .button{
   margin-top: 2rem;
+  color: #FF0000;
+  background-color: #E0FFFF;
+  font-weight: bold;
 }
+
