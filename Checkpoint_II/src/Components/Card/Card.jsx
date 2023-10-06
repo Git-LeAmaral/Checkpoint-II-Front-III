@@ -11,7 +11,7 @@ const Card = ({dentista}) => {
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`card ${darkMode ? `light-card bg-light` : `dark-card bg-dark`}`}>
+      <div className={`card ${styles.card} ${darkMode ? `light-card bg-light` : `dark-card bg-dark`}`}>
 
         <img
           className="card-img-top"
