@@ -2,28 +2,29 @@
   margin-top: auto;
   flex-direction: column;
   display: flex;
-
-  border: 2px solid red;
 }
 
 .top {
   display: flex;
   text-transform: uppercase;
   padding: 0.5rem;
-  background: #f39595;
-  border: 2px solid green;
-  color: white; 
-  margin: auto;
+  background: #9d9a9a;
+  color: white;  
   max-width: 300px; 
+  font-size: 10px;
+  margin: auto;
   margin-top: 2rem;
-  font-size: 10px;  
+  border: none;   
+  }
+
+  .top:hover{
+    background-color: rgb(97, 92, 92) !important;
   }
 
   .seta{
     max-width: 1.5rem;
     height: auto;  
-  }
-
+  }  
 
 .footer {
   padding: 2rem ;
