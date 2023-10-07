@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import ScheduleFormModal from '../ScheduleModal/ScheduleFormModal'
 import styles from './DetailCard.module.css'
+//import { useParams } from 'react-router-dom'
 
 
 const DetailCard = () => {
@@ -30,7 +31,7 @@ const DetailCard = () => {
               <li className="list-group-item">
                 Sobrenome: {'Sobrenome do Dentista'}
               </li>
-              <li className="list-group-item">
+              <li className="list-group-item ${styles.colorLight}" >
                 Usuário: {'Nome de usuário do Dentista'}
               </li>
             </ul>
