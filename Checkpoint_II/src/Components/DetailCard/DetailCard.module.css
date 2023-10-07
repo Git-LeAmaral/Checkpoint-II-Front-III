@@ -11,5 +11,9 @@
   color: #FF0000;
   background-color: #E0FFFF;
   font-weight: bold;
+
+.colorLight{
+  color: #98FB98;
+}
 }
 
