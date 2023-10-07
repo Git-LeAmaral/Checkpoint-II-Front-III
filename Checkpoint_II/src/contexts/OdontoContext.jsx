@@ -16,7 +16,7 @@ const OdontoContextProvider = ({children}) => {
     setDarkMode(!darkMode)
   }
 
-  const [state, dispatch] = useReducer(loginReducer, {login: !localStorage.getItem("token")})
+  const [state, dispatch] = useReducer(loginReducer, {login: !!localStorage.getItem("token")})
 
   const login = () => {
     dispatch({type: 'SET_LOGIN'})
@@ -25,6 +25,7 @@ const OdontoContextProvider = ({children}) => {
   const logout = () => {
     dispatch({type: 'SET_LOGOUT'})
     localStorage.removeItem("token");
+    console.log("não está funcionando")
   }
 
   return (
