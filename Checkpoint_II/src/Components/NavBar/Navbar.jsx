@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   
-  const { darkMode, changeTheme, login, logout } = useContext(OdontoContext)
+  const { darkMode, changeTheme, state, logout } = useContext(OdontoContext)
 
   return (
     <header className="sticky-top">
@@ -42,7 +42,7 @@ const Navbar = () => {
               <li className={`nav-item ${styles.navBarLink}`}>
 
                 {/* Ao clicar, o usuário deve ser redirecionado a home, com react-router */}
-                {login ? (<button onClick={() => logout()}
+                {state.login ? (<button onClick={() => logout()}
 
                     className={`btn ${darkMode ? `btn-light` : `btn-dark`}`}>
                       Logout
