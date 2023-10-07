@@ -10,7 +10,7 @@ export const LoginForm = () => {
 
   const [errorForm, setErrorForm] = useState(false);
   const { darkMode, login } = useContext(OdontoContext);
-  const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
   const handleSubmit = async (e) => {

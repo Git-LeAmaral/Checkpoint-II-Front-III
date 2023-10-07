@@ -1,4 +1,5 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useReducer } from "react";
+import {loginReducer} from "../reducers/loginReducers";
 
 export const OdontoContext = createContext()
 
@@ -15,8 +16,19 @@ const OdontoContextProvider = ({children}) => {
     setDarkMode(!darkMode)
   }
 
+  const [state, dispatch] = useReducer(loginReducer, {login: !localStorage.getItem("token")})
+
+  const login = () => {
+    dispatch({type: 'SET_LOGIN'})
+  }
+
+  const logout = () => {
+    dispatch({type: 'SET_LOGOUT'})
+    localStorage.removeItem("token");
+  }
+
   return (
-    <OdontoContext.Provider value={{changeTheme, darkMode}}>
+    <OdontoContext.Provider value={{changeTheme, state, login, logout, darkMode}}>
       {children}
     </OdontoContext.Provider>
   )
