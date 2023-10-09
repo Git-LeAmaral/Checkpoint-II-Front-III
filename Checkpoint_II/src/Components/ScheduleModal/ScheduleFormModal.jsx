@@ -1,6 +1,12 @@
+import { useContext } from 'react'
 import ScheduleForm from '../ScheduleForm/ScheduleForm'
+import { OdontoContext } from '../../contexts/OdontoContext'
+import styles from './ScheduleFormModal.module.css'
 
 const ScheduleFormModal = () => {
+
+  const { darkMode } = useContext(OdontoContext);
+
   return (
     <div
       className={`modal fade`}
@@ -10,18 +16,16 @@ const ScheduleFormModal = () => {
       aria-hidden="true"
     >
       <div className="modal-dialog">
-        {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-        // está em dark mode e deverá utilizar o css correto */}
-        <div className={`modal-content`}>
+        
+        <div className={`modal-content ${darkMode ? '' : styles.DarkModal}`}>
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="exampleModalLabel">
               Selecione o dentista, paciente e a data e hora
             </h1>
-            {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-            // está em dark mode e deverá utilizado o css correto */}
+            
             <button
               type="button"
-              className={`btn-close`}
+              className={`btn-close ${darkMode ? '' : styles.closeButtonDark}`}
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>

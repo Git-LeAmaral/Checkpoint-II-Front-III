@@ -1,24 +1,87 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import styles from "./ScheduleForm.module.css";
+import { OdontoContext } from "../../contexts/OdontoContext";
+import { api } from "../../services/api"
+import Swal from "sweetalert2";
 
 const ScheduleForm = () => {
+  
+  const [dentista, setDentista] = useState([]);
+  const [paciente, setPaciente] = useState([]);
+  const { darkMode } = useContext(OdontoContext); 
+  const token = localStorage.getItem("token");
+
+  const getPacientes = async() => {
+    
+    const response = await api.get('/paciente');
+    setPaciente(response.data.body);
+
+  }
+
+  const getDentistas = async() => {
+    
+    const response = await api.get('/dentista');
+    setDentista(response.data);
+  }
+
   useEffect(() => {
-    //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
-    //e pacientes e carregar os dados em 2 estados diferentes
+
+    getPacientes()
+    getDentistas()
+  
   }, []);
 
-  const handleSubmit = (event) => {
-    //Nesse handlesubmit você deverá usar o preventDefault,
-    //obter os dados do formulário e enviá-los no corpo da requisição 
-    //para a rota da api que marca a consulta
-    //lembre-se que essa rota precisa de um Bearer Token para funcionar.
-    //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
+  const handleSubmit = async (event) => {
+    
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    console.log(token);
+    try {
+      const response = await api.post('/consulta' , {
+        dentista: {matricula: data.dentist},
+        paciente: {matricula: data.patient},
+        dataHoraAgendamento: data.appointmentDate,
+        
+      }, {
+        headers: {
+          'Content-Type' : 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if(response.status === 200) {
+        console.log(response.data);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso',
+          text: 'Consulta cadastrada',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = '/';
+          } else {
+            window.location.href = '/';
+          }
+        })
+      }
+
+    } catch (error) {
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Atenção:',
+        text: error.response.data,
+      })
+
+    }
   };
 
   return (
     <>
-      {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-        // está em dark mode e deverá utilizar o css correto */}
+      
       <div
         className={`text-center container}`
         }
@@ -27,13 +90,14 @@ const ScheduleForm = () => {
           <div className={`row ${styles.rowSpacing}`}>
             <div className="col-sm-12 col-lg-6">
               <label htmlFor="dentist" className="form-label">
-                Dentist
+                Dentista
               </label>
               <select className="form-select" name="dentist" id="dentist">
-                {/*Aqui deve ser feito um map para listar todos os dentistas*/}
-                <option key={'Matricula do dentista'} value={'Matricula do dentista'}>
-                  {`Nome Sobrenome`}
-                </option>
+              { dentista?.map( (dentista, index) => (
+                  <option key={dentista.matricula} 
+                    value={dentista.matricula}>
+                    {dentista.nome} {dentista.sobrenome}
+                  </option>))}
               </select>
             </div>
             <div className="col-sm-12 col-lg-6">
@@ -41,10 +105,11 @@ const ScheduleForm = () => {
                 Patient
               </label>
               <select className="form-select" name="patient" id="patient">
-                {/*Aqui deve ser feito um map para listar todos os pacientes*/}
-                <option key={'Matricula do paciente'} value={'Matricula do paciente'}>
-                  {`Nome Sobrenome`}
-                </option>
+              { paciente?.map((paciente, index) => (                         
+                  <option key={paciente.matricula} 
+                    value={paciente.matricula} >
+                    {paciente.nome}  {paciente.sobrenome}
+                  </option>))}
               </select>
             </div>
           </div>
@@ -62,11 +127,9 @@ const ScheduleForm = () => {
             </div>
           </div>
           <div className={`row ${styles.rowSpacing}`}>
-            {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-        // está em dark mode e deverá utilizar o css correto */}
+        
             <button
-              className={`btn btn-light ${styles.button
-                }`}
+              className={`btn ${darkMode ? `btn-light` : `btn-dark`} ${styles.button}`}
               type="submit"
             >
               Schedule

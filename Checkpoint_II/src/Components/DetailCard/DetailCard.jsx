@@ -1,23 +1,20 @@
-import { useEffect } from 'react'
-import ScheduleFormModal from '../ScheduleModal/ScheduleFormModal'
+import { useContext } from 'react'
 import styles from './DetailCard.module.css'
-//import { useParams } from 'react-router-dom'
+import { OdontoContext } from '../../contexts/OdontoContext'
+import ScheduleFormModal from '../ScheduleModal/ScheduleFormModal'
 
 
-const DetailCard = () => {
-  useEffect(() => {
-    //Nesse useEffect, você vai fazer um fetch na api passando o
-    //id do dentista que está vindo do react-router e carregar os dados em algum estado
-  }, [])
+const DetailCard = ({dentista}) => {
+  
+  const { darkMode } = useContext(OdontoContext);
+
   return (
-    //As instruções que estão com {''} precisam ser
-    //substituídas com as informações que vem da api
+    
     <>
-      <h1>Detail about Dentist {'Nome do Dentista'} </h1>
-      <section className="card col-sm-12 col-lg-6 container">
-        {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-        // está em dark mode e deverá utilizar o css correto */}
-        <div className={`card-body row`}>
+      <h1>{dentista.nome} {dentista.sobrenome}</h1>
+      <section className={`card col-sm-12 col-lg-6 container ${darkMode ? `light-card bg-light` : `dark-card bg-secondary border-2 border-secondary mb-2`}`}>
+      
+        <div className={`card-body row ${darkMode ? `card-light bg-light` : `card-dark bg-dark bg-opacity-75 `}`}>
           <div className="col-sm-12 col-lg-6">
             <img
               className="card-img-top"
@@ -27,12 +24,13 @@ const DetailCard = () => {
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-              <li className="list-group-item">Nome: {'Nome do Dentista'}</li>
-              <li className="list-group-item">
-                Sobrenome: {'Sobrenome do Dentista'}
+              <li className={`list-group-item ${darkMode ? `card-light bg-light` : `card-dark bg-secondary border-black border-opacity-75 ${styles.colorLight}`} `}>Nome: {dentista.nome}</li>
+
+              <li className={`list-group-item ${darkMode ? `card-light bg-light` : `card-dark bg-secondary border-black border-opacity-75 ${styles.colorLight}`} `}>
+                Sobrenome: {dentista.sobrenome}
               </li>
-              <li className="list-group-item ${styles.colorLight}" >
-                Usuário: {'Nome de usuário do Dentista'}
+              <li className={`list-group-item ${darkMode ? `card-light bg-light` : `card-dark bg-secondary border-black border-opacity-75 ${styles.colorLight}`} `}>
+                Usuário: {dentista?.usuario?.username}
               </li>
             </ul>
             <div className="text-center">
@@ -49,7 +47,8 @@ const DetailCard = () => {
           </div>
         </div>
       </section>
-      <ScheduleFormModal />
+
+      {<ScheduleFormModal />}
     </>
   )
 }

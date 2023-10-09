@@ -13,9 +13,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    //Nesse useEffect, deverá ser obtido todos os dentistas da API
-    //Armazena-los em um estado para posteriormente fazer um map
-    //Usando o componente <Card />
+    
     getDentistas();
 
   }, []);
